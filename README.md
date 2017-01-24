@@ -19,12 +19,21 @@
 ```
 
 ## Summary
+
 This is the official [Accedo AppGrid](https://www.accedo.tv/appgrid/) middleware for Express.
 
 The [AppGrid SDK](https://github.com/Accedo-Products/appgrid-sdk-js/) provides an easy way to make use of AppGrid APIs.
 This middleware provides additional benefits and makes things even easier in the context of an Express app.
 
 We follow [semantic versioning](http://semver.org/), and you may have a look at our change log [here](./CHANGELOG.md).
+
+## Compatibility
+
+This middleware is written in ES6 as supported in Node 6 LTS (the recommended Node.js version).
+
+It should be usable starting from Node 4.
+
+For earlier Node versions, you may try introducing a compilation step to ES5 (through Babel or Buble, for instance). Note we did not test this and **strongly suggest using the current Node LTS (Long Term Support) version**.
 
 ## Features
 
