@@ -16,9 +16,9 @@ const defaultOnSessionKeyChanged = (key, res) => res.cookie(COOKIE_SESSION_KEY, 
 
 
 /**
- * An express-compatible middleware.
+ * An express-compatible middleware. This is the only export on this library.
  *
- * This uses the cookie-parser middleware, so you can also take advantage of the `req.cookies` array.
+ * It uses the cookie-parser middleware, so you can also take advantage of the `req.cookies` array.
  *
  * This middleware takes care of creating an AppGrid client instance for each request automatically.
  * By default, it will also reuse and persist the deviceId and sessionKey using the request and response cookies.
@@ -29,14 +29,13 @@ const defaultOnSessionKeyChanged = (key, res) => res.cookie(COOKIE_SESSION_KEY, 
  *
  * Note any extra argument provided in the config object will be passed onto the appgrid client factory during instanciation.
  *
- * This utility method is not used through an appgrid client instance, but available statically
  * @function
  * @param  {object} config the configuration
  * @param  {string} config.appKey the application Key that will be used for all appgrid clients
  * @param  {function} [config.getRequestInfo] callback that receives the request and returns an object with deviceId, sessionKey and gid properties.
  * @param  {function} [config.onDeviceIdGenerated] callback that receives the new deviceId (if one was not returned by getRequestInfo) and the response
  * @param  {function} [config.onSessionKeyChanged] callback that receives the new sessionKey (anytime a new one gets generated) and the response
- * @param  {any} [config.___] You can also pass any extra option accepted by the appgrid factory function (log, gid, ...)
+ * @param  {any} [config.log/gid/etc] You can also pass any extra option accepted by the appgrid factory function (log, gid, ...)
  * @return {function} a middleware function compatible with express
  * @example <caption>Using the default cookie strategy</caption>
  * const appgrid = require('appgrid-express');
@@ -84,7 +83,7 @@ const defaultOnSessionKeyChanged = (key, res) => res.cookie(COOKIE_SESSION_KEY, 
  * })
  * .listen(PORT, () => console.log(`Server is on ! Try http://localhost:${PORT}/test`));
  */
-const factory = (config) => {
+const appgridExpress = (config) => {
   const {
     getRequestInfo = defaultGetRequestInfo,
     onDeviceIdGenerated = defaultOnDeviceIdGenerated,
@@ -111,4 +110,4 @@ const factory = (config) => {
   });
 };
 
-module.exports = factory;
+module.exports = appgridExpress;
