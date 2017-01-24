@@ -1,0 +1,50 @@
+{
+  "name": "appgrid-express",
+  "version": "1.0.0",
+  "description": "The Official AppGrid SDK middleware for Express",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint . --ext .js",
+    "test": "mocha --opts ./test/mocha.opts test/",
+    "doc": "documentation build src/index.js -c doc_config.yml --format html -o docs",
+    "docmd": "documentation build src/index.js -c doc_config.yml --format md > API.md",
+    "prepublish": "npm run lint && npm test && npm run doc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Accedo-Products/appgrid-sdk-node.git"
+  },
+  "keywords": [
+    "appgrid",
+    "accedo",
+    "sdk",
+    "node",
+    "express",
+    "middleware"
+  ],
+  "author": "Accedo, AB",
+  "contributors": [
+    "Gregory Desfour"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "http://appgrid.accedo.tv/",
+  "files": [
+    "src/"
+  ],
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chalk": "^1.1.3",
+    "documentation": "4.0.0-beta.18",
+    "eslint": "^3.8.1",
+    "eslint-config-airbnb-base": "9",
+    "eslint-import-resolver-node": "^0.3.0",
+    "eslint-plugin-import": "^2.0.1",
+    "express": "^4.14.0",
+    "mocha": "^3.1.2",
+    "sinon": "^1.17.7"
+  },
+  "dependencies": {
+    "appgrid": "^2.3.0",
+    "cookie-parser": "1.x"
+  }
+}
