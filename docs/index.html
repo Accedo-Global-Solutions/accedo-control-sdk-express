@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>  | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
+  <link href='assets/style.css' type='text/css' rel='stylesheet' />
+  <link href='assets/github.css' type='text/css' rel='stylesheet' />
+</head>
+<body class='documentation'>
+  <div class='max-width-4 mx-auto'>
+    <div class='clearfix md-mxn2'>
+      <div class='fixed xs-hide fix-3 overflow-auto max-height-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'></h3>
+          <div class='mb1'><code></code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#appgridexpress'
+                  class="">
+                  appgridExpress
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='http://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div class='fix-margin-3'>
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='appgridexpress'>
+      appgridExpress
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>An express-compatible middleware. This is the only export on this library.</p>
+<p>It uses the cookie-parser middleware, so you can also take advantage of the <code>req.cookies</code> array.</p>
+<p>This middleware takes care of creating an AppGrid client instance for each request automatically.
+By default, it will also reuse and persist the deviceId and sessionKey using the request and response cookies.
+That strategy can be changed by passing the optional callbacks,
+so you could make use of headers or request parameters for instance.</p>
+<p>Each instance is attached to the response object and available to the next express handlers as <code>res.locals.appgridClient</code>.</p>
+<p>Note any extra argument provided in the config object will be passed onto the appgrid client factory during instanciation.</p>
+
+
+  <div class='pre p1 fill-light mt0'>appgridExpress(config: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>config</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    the configuration
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>config.appKey</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+                  </td>
+                  <td class='break-word'><span>the application Key that will be used for all appgrid clients
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>config.getRequestInfo</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>?</code>
+                  </td>
+                  <td class='break-word'><span>callback that receives the request and returns an object with deviceId, sessionKey and gid properties.
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>config.onDeviceIdGenerated</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>?</code>
+                  </td>
+                  <td class='break-word'><span>callback that receives the new deviceId (if one was not returned by getRequestInfo) and the response
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>config.onSessionKeyChanged</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>?</code>
+                  </td>
+                  <td class='break-word'><span>callback that receives the new sessionKey (anytime a new one gets generated) and the response
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>config.log/gid/etc</span> <code class='quiet'>any?</code>
+                  </td>
+                  <td class='break-word'><span>You can also pass any extra option accepted by the appgrid factory function (log, gid, ...)
+</span></td>
+                </tr>
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a></code>:
+        a middleware function compatible with express
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      <p><p>Using the default cookie strategy</p>
+</p>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> appgrid = <span class="hljs-built_in">require</span>(<span class="hljs-string">'appgrid-express'</span>);
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
+
+<span class="hljs-keyword">const</span> PORT = <span class="hljs-number">3000</span>;
+
+express()
+<span class="hljs-comment">// handle proxy servers if needed, to pass the user's IP instead of the proxy's.</span>
+.set(<span class="hljs-string">'trust proxy'</span>, [<span class="hljs-string">'loopback'</span>, <span class="hljs-string">'linklocal'</span>, <span class="hljs-string">'uniquelocal'</span>])
+<span class="hljs-comment">// place the appgrid middleware before your request handlers</span>
+.use(appgrid({ <span class="hljs-attr">appKey</span>: <span class="hljs-string">'56ea6a370db1bf032c9df5cb'</span> }))
+.get(<span class="hljs-string">'/test'</span>, (req, res) =&gt; {
+   <span class="hljs-comment">// access your client instance, it's already linked to the deviceId and sessionKey via cookies</span>
+   res.locals.appgridClient.getEntryById(<span class="hljs-string">'56ea7bd6935f75032a2fd431'</span>)
+   .then(<span class="hljs-function"><span class="hljs-params">entry</span> =&gt;</span> res.send(entry))
+   .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> res.status(<span class="hljs-number">500</span>).send(<span class="hljs-string">'Failed to get the result'</span>));
+})
+.listen(PORT, () =&gt; <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Server is on ! Try http://localhost:<span class="hljs-subst">${PORT}</span>/test`</span>));</pre>
+    
+      <p><p>Using custom headers to extract deviceId and sessionKey and to pass down any change</p>
+</p>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> appgrid = <span class="hljs-built_in">require</span>(<span class="hljs-string">'appgrid-express'</span>);
+<span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
+
+<span class="hljs-keyword">const</span> PORT = <span class="hljs-number">3000</span>;
+<span class="hljs-keyword">const</span> HEADER_DEVICE_ID = <span class="hljs-string">'X-AG-DEVICE-ID'</span>;
+<span class="hljs-keyword">const</span> HEADER_SESSION_KEY = <span class="hljs-string">'X-AG-SESSION-KEY'</span>;
+<span class="hljs-keyword">const</span> HEADER_GID = <span class="hljs-string">'X-AG-GID'</span>;
+
+express()
+.use(appgrid({
+  <span class="hljs-attr">appKey</span>: <span class="hljs-string">'56ea6a370db1bf032c9df5cb'</span>,
+  <span class="hljs-comment">// extract deviceId, sessionKey and gid from custom headers</span>
+  getRequestInfo: <span class="hljs-function"><span class="hljs-params">req</span> =&gt;</span> ({ <span class="hljs-attr">deviceId</span>: req.get(HEADER_DEVICE_ID), <span class="hljs-attr">sessionKey</span>: req.get(HEADER_SESSION_KEY), <span class="hljs-attr">gid</span>: req.get(HEADER_GID) }),
+  <span class="hljs-comment">// pass down any change on the deviceId (the header won't be set if unchanged compared to the value in getRequestInfo)</span>
+  onDeviceIdGenerated: <span class="hljs-function">(<span class="hljs-params">id, res</span>) =&gt;</span> res.set(HEADER_DEVICE_ID, id),
+  <span class="hljs-comment">// pass down any change on the sessionKey (the header won't be set if unchanged compared to the value in getRequestInfo)</span>
+  onSessionKeyChanged: <span class="hljs-function">(<span class="hljs-params">key, res</span>) =&gt;</span> res.set(HEADER_SESSION_KEY, key),
+  log(...args) { <span class="hljs-built_in">console</span>.log(...args) }
+}))
+.get(<span class="hljs-string">'/test'</span>, (req, res) =&gt; {
+  res.locals.appgridClient.getEntryById(<span class="hljs-string">'56ea7bd6935f75032a2fd431'</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">entry</span> =&gt;</span> res.send(entry))
+  .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> res.status(<span class="hljs-number">500</span>).send(<span class="hljs-string">'Failed to get the result'</span>));
+})
+.listen(PORT, () =&gt; <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Server is on ! Try http://localhost:<span class="hljs-subst">${PORT}</span>/test`</span>));</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>

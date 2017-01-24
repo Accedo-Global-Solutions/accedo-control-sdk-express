@@ -6,13 +6,13 @@
   "scripts": {
     "lint": "eslint . --ext .js",
     "test": "mocha --opts ./test/mocha.opts test/",
-    "doc": "documentation build src/index.js -c doc_config.yml --format html -o docs",
-    "docmd": "documentation build src/index.js -c doc_config.yml --format md > API.md",
+    "doc": "documentation build src/index.js --format html -o docs",
+    "docmd": "documentation build src/index.js --format md > API.md",
     "prepublish": "npm run lint && npm test && npm run doc"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:Accedo-Products/appgrid-sdk-node.git"
+    "url": "git@github.com:Accedo-Products/appgrid-sdk-express.git"
   },
   "keywords": [
     "appgrid",
