@@ -68,38 +68,10 @@ The doc for the REST APIs is also listed as AppGrid-specific terminology is defi
 
 Then you can get the default export to use the middleware:
 
-<table>
-  <tr>
-    <td>
-      <pre lang="js">CommonJS</pre>
-    </td>
-    <td>
-      <pre lang="js">const appgrid = require('appgrid-express')</pre>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <pre lang="js">ES6 Module</pre>
-    </td>
-    <td>
-      <pre lang="js">import appgrid from 'appgrid-express'</pre>
-    </td>
-  </tr>
-</table>
-
 | Method | Code
 |------|------
 |CommonJS| <pre lang="js">const appgrid = require('appgrid-express')</pre>
 |ES6 Module| <pre lang="js">import appgrid from 'appgrid-express'</pre>
-
-
-```js
-const appgrid = require('appgrid-express')
-```
-Or, using the ES6 module syntax:
-```js
-import appgrid from 'appgrid-express'
-```
 
 ## Examples
 
