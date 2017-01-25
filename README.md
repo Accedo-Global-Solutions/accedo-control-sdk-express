@@ -35,7 +35,7 @@ It should be usable starting from Node 4.
 
 For earlier Node versions, you may try introducing a compilation step to ES5 (through Babel or Buble, for instance). Note we did not test this and **strongly suggest using the current Node LTS (Long Term Support) version**.
 
-Regarding Express, we support and test again version 4.
+Regarding Express, we support and test against version 4.
 
 ## Features
 
