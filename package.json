@@ -47,7 +47,7 @@
     "appgrid": "^2.3.0",
     "cookie-parser": "1.x"
   },
-  "engines" : {
-    "node" : ">=4"
+  "engines": {
+    "node": ">=4"
   }
 }
