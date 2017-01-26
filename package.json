@@ -44,7 +44,7 @@
     "sinon": "^1.17.7"
   },
   "dependencies": {
-    "appgrid": "^2.3.0",
+    "appgrid": "3.x",
     "cookie-parser": "1.x"
   },
   "engines": {
