@@ -18,6 +18,13 @@ const defaultOnSessionKeyChanged = (key, res) => res.cookie(COOKIE_SESSION_KEY, 
 /**
  * An express-compatible middleware. This is the only export on this library.
  *
+ * It's a function but has some properties attached to it that let you access some defaults:
+ *
+ * - 3 functions are the default ones for optional parameters detailed below:
+ * `defaultOnDeviceIdGenerated`, `defaultGetRequestInfo`, `defaultOnSessionKeyChanged`
+ * - 2 strings are the default cookie names:
+ * `COOKIE_DEVICE_ID`, `COOKIE_SESSION_KEY`
+ *
  * It uses the cookie-parser middleware, so you can also take advantage of the `req.cookies` array.
  *
  * This middleware takes care of creating an AppGrid client instance for each request automatically.
@@ -32,7 +39,7 @@ const defaultOnSessionKeyChanged = (key, res) => res.cookie(COOKIE_SESSION_KEY, 
  * @function
  * @param  {object} config the configuration
  * @param  {string} config.appKey the application Key that will be used for all appgrid clients
- * @param  {function} [config.getRequestInfo] callback that receives the request and returns an object with deviceId, sessionKey and gid properties.
+ * @param  {function} [config.getRequestInfo] callback that receives the request and returns an object with optional deviceId, sessionKey and gid properties.
  * @param  {function} [config.onDeviceIdGenerated] callback that receives the new deviceId (if one was not returned by getRequestInfo) and the response
  * @param  {function} [config.onSessionKeyChanged] callback that receives the new sessionKey (anytime a new one gets generated) and the response
  * @param  {any} [config.log/gid/etc] You can also pass any extra option accepted by the appgrid factory function (log, gid, ...)
@@ -76,12 +83,21 @@ const defaultOnSessionKeyChanged = (key, res) => res.cookie(COOKIE_SESSION_KEY, 
  *   onSessionKeyChanged: (key, res) => res.set(HEADER_SESSION_KEY, key),
  *   log(...args) { console.log(...args) }
  * }))
- * .get('/test', (req, res) => {
- *   res.locals.appgridClient.getEntryById('56ea7bd6935f75032a2fd431')
- *   .then(entry => res.send(entry))
- *   .catch(err => res.status(500).send('Failed to get the result'));
- * })
- * .listen(PORT, () => console.log(`Server is on ! Try http://localhost:${PORT}/test`));
+ *
+ * @example <caption>Using getRequestInfo and the defaultGetRequestInfo together</caption>
+ * const appgrid = require('appgrid-express');
+ * const express = require('express');
+ *
+ * const PORT = 3000;
+ * const HEADER_GID = 'X-AG-GID';
+ *
+ * express()
+ * .use(appgrid({
+ *   appKey: '56ea6a370db1bf032c9df5cb',
+ *   // extract the gid from custom headers, but use the default strategy for the deviceId and sessionKey
+ *   getRequestInfo: req => Object.assign(appgrid.defaultGetRequestInfo(req), { gid: req.get(HEADER_GID) }),
+ *   log(...args) { console.log(...args) }
+ * }))
  */
 const appgridExpress = (config) => {
   const {
@@ -109,5 +125,15 @@ const appgridExpress = (config) => {
     next();
   });
 };
+
+// Export useful defaults so users can wrap them, refer to them, etc
+// This is done as members of the `appgridExpress` exported function so it's not a breaking change
+Object.assign(appgridExpress, {
+  defaultOnDeviceIdGenerated,
+  defaultGetRequestInfo,
+  defaultOnSessionKeyChanged,
+  COOKIE_DEVICE_ID,
+  COOKIE_SESSION_KEY,
+});
 
 module.exports = appgridExpress;
