@@ -1,6 +1,6 @@
 {
   "name": "appgrid-express",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Official AppGrid SDK middleware for Express",
   "main": "src/index.js",
   "scripts": {
@@ -44,7 +44,7 @@
     "sinon": "^1.17.7"
   },
   "dependencies": {
-    "appgrid": "3.x",
+    "appgrid": "^3.1.4",
     "cookie-parser": "1.x"
   },
   "engines": {
