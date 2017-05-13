@@ -74,8 +74,8 @@ The doc for the REST APIs is also listed as AppGrid-specific terminology is defi
 
 | Your preferred CLI tool | Command
 |------|------
-|Yarn|`yarn add appgrid-express`
-|NPM|`npm install --save appgrid-express`
+|Yarn|`yarn add appgrid appgrid-express`
+|NPM|`npm install --save appgrid appgrid-express`
 
 Then you can get the default export to use the middleware:
 
