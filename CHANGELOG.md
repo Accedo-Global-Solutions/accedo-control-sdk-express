@@ -1,3 +1,16 @@
+# 3.0.0
+
+- BREAKING: New name for this library and the main dependency under GitHub and NPM
+- Now using Prettier to style the code
+
+:sparkles: This is the first release published in NPM as `@accedo/accedo-one-express`. It replaces `appgrid-express`.
+
+Accedo One is the new product that replaces AppGrid, and will bring additional possibilities
+
+This library is now depending on `@accedo/accedo-one`, which replaces the obsolete `appgrid`.
+
+We expect this major update to be painless for most people - just make sure to use the `res.locals.accedoOne` variable instead of `res.locals.appgrid` on browsers.
+
 # 2.0.0
 
 TLDR: if you upgrade from `appgrid-express` v1, just make sure to run `npm i -S appgrid` or `yarn add appgrid`.
