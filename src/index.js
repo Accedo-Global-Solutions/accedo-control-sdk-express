@@ -34,7 +34,7 @@ const defaultOnSessionKeyChanged = (key, res) =>
  *
  * It uses the cookie-parser middleware, so you can also take advantage of the `req.cookies` array.
  *
- * This middleware takes care of creating an AppGrid client instance for each request automatically.
+ * This middleware takes care of creating an Accedo One client instance for each request automatically.
  * By default, it will also reuse and persist the deviceId and sessionKey using the request and response cookies.
  * That strategy can be changed by passing the optional callbacks,
  * so you could make use of headers or request parameters for instance.
