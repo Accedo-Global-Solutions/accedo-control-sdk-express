@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>appgrid-express 2.0.0 | Documentation</title>
+  <title>@accedo/accedo-one-express 3.0.0 | Documentation</title>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' type='text/css' rel='stylesheet' />
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
@@ -13,8 +13,8 @@
     <div class='clearfix md-mxn2'>
       <div class='fixed xs-hide fix-3 overflow-auto max-height-100'>
         <div class='py1 px2'>
-          <h3 class='mb0 no-anchor'>appgrid-express</h3>
-          <div class='mb1'><code>2.0.0</code></div>
+          <h3 class='mb0 no-anchor'>@accedo/accedo-one-express</h3>
+          <div class='mb1'><code>3.0.0</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -25,9 +25,9 @@
               
                 
                 <li><a
-                  href='#appgridexpress'
+                  href='#accedooneexpress'
                   class="">
-                  appgridExpress
+                  accedoOneExpress
                   
                 </a>
                 
@@ -48,8 +48,8 @@
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='appgridexpress'>
-      appgridExpress
+    <h3 class='fl m0' id='accedooneexpress'>
+      accedoOneExpress
     </h3>
     
     
@@ -65,15 +65,15 @@
 <code>COOKIE_DEVICE_ID</code>, <code>COOKIE_SESSION_KEY</code></li>
 </ul>
 <p>It uses the cookie-parser middleware, so you can also take advantage of the <code>req.cookies</code> array.</p>
-<p>This middleware takes care of creating an AppGrid client instance for each request automatically.
+<p>This middleware takes care of creating an Accedo One client instance for each request automatically.
 By default, it will also reuse and persist the deviceId and sessionKey using the request and response cookies.
 That strategy can be changed by passing the optional callbacks,
 so you could make use of headers or request parameters for instance.</p>
-<p>Each instance is attached to the response object and available to the next express handlers as <code>res.locals.appgridClient</code>.</p>
-<p>Note any extra argument provided in the config object will be passed onto the appgrid client factory during instanciation.</p>
+<p>Each instance is attached to the response object and available to the next express handlers as <code>res.locals.accedoOneClient</code>.</p>
+<p>Note any extra argument provided in the config object will be passed onto the Accedo One client factory during instanciation.</p>
 
 
-  <div class='pre p1 fill-light mt0'>appgridExpress(config: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a></div>
+  <div class='pre p1 fill-light mt0'>accedoOneExpress(config: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a></div>
   
   
 
@@ -111,7 +111,7 @@ so you could make use of headers or request parameters for instance.</p>
                 <tr>
                   <td class='break-word'><span class='code bold'>config.appKey</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
                   </td>
-                  <td class='break-word'><span>the application Key that will be used for all appgrid clients
+                  <td class='break-word'><span>the application Key that will be used for all Accedo One clients
 </span></td>
                 </tr>
               
@@ -139,7 +139,7 @@ so you could make use of headers or request parameters for instance.</p>
                 <tr>
                   <td class='break-word'><span class='code bold'>config.log/gid/etc</span> <code class='quiet'>any?</code>
                   </td>
-                  <td class='break-word'><span>You can also pass any extra option accepted by the appgrid factory function (log, gid, ...)
+                  <td class='break-word'><span>You can also pass any extra option accepted by the accedoOne factory function (log, gid, ...)
 </span></td>
                 </tr>
               
@@ -170,7 +170,7 @@ so you could make use of headers or request parameters for instance.</p>
     
       <p><p>Using the default cookie strategy</p>
 </p>
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> appgrid = <span class="hljs-built_in">require</span>(<span class="hljs-string">'appgrid-express'</span>);
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> accedoOne = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@accedo/accedo-one-express'</span>);
 <span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
 
 <span class="hljs-keyword">const</span> PORT = <span class="hljs-number">3000</span>;
@@ -178,11 +178,11 @@ so you could make use of headers or request parameters for instance.</p>
 express()
 <span class="hljs-comment">// handle proxy servers if needed, to pass the user's IP instead of the proxy's.</span>
 .set(<span class="hljs-string">'trust proxy'</span>, [<span class="hljs-string">'loopback'</span>, <span class="hljs-string">'linklocal'</span>, <span class="hljs-string">'uniquelocal'</span>])
-<span class="hljs-comment">// place the appgrid middleware before your request handlers</span>
-.use(appgrid({ <span class="hljs-attr">appKey</span>: <span class="hljs-string">'56ea6a370db1bf032c9df5cb'</span> }))
+<span class="hljs-comment">// place the accedoOne middleware before your request handlers</span>
+.use(accedoOne({ <span class="hljs-attr">appKey</span>: <span class="hljs-string">'56ea6a370db1bf032c9df5cb'</span> }))
 .get(<span class="hljs-string">'/test'</span>, (req, res) =&gt; {
    <span class="hljs-comment">// access your client instance, it's already linked to the deviceId and sessionKey via cookies</span>
-   res.locals.appgridClient.getEntryById(<span class="hljs-string">'56ea7bd6935f75032a2fd431'</span>)
+   res.locals.accedoOneClient.getEntryById(<span class="hljs-string">'56ea7bd6935f75032a2fd431'</span>)
    .then(<span class="hljs-function"><span class="hljs-params">entry</span> =&gt;</span> res.send(entry))
    .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> res.status(<span class="hljs-number">500</span>).send(<span class="hljs-string">'Failed to get the result'</span>));
 })
@@ -190,7 +190,7 @@ express()
     
       <p><p>Using custom headers to extract deviceId and sessionKey and to pass down any change</p>
 </p>
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> appgrid = <span class="hljs-built_in">require</span>(<span class="hljs-string">'appgrid-express'</span>);
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> accedoOne = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@accedo/accedo-one-express'</span>);
 <span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
 
 <span class="hljs-keyword">const</span> PORT = <span class="hljs-number">3000</span>;
@@ -199,7 +199,7 @@ express()
 <span class="hljs-keyword">const</span> HEADER_GID = <span class="hljs-string">'X-AG-GID'</span>;
 
 express()
-.use(appgrid({
+.use(accedoOne({
   <span class="hljs-attr">appKey</span>: <span class="hljs-string">'56ea6a370db1bf032c9df5cb'</span>,
   <span class="hljs-comment">// extract deviceId, sessionKey and gid from custom headers</span>
   getRequestInfo: <span class="hljs-function"><span class="hljs-params">req</span> =&gt;</span> ({ <span class="hljs-attr">deviceId</span>: req.get(HEADER_DEVICE_ID), <span class="hljs-attr">sessionKey</span>: req.get(HEADER_SESSION_KEY), <span class="hljs-attr">gid</span>: req.get(HEADER_GID) }),
@@ -212,17 +212,17 @@ express()
     
       <p><p>Using getRequestInfo and the defaultGetRequestInfo together</p>
 </p>
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> appgrid = <span class="hljs-built_in">require</span>(<span class="hljs-string">'appgrid-express'</span>);
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> accedoOne = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@accedo/accedo-one-express'</span>);
 <span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
 
 <span class="hljs-keyword">const</span> PORT = <span class="hljs-number">3000</span>;
 <span class="hljs-keyword">const</span> HEADER_GID = <span class="hljs-string">'X-AG-GID'</span>;
 
 express()
-.use(appgrid({
+.use(accedoOne({
   <span class="hljs-attr">appKey</span>: <span class="hljs-string">'56ea6a370db1bf032c9df5cb'</span>,
   <span class="hljs-comment">// extract the gid from custom headers, but use the default strategy for the deviceId and sessionKey</span>
-  getRequestInfo: <span class="hljs-function"><span class="hljs-params">req</span> =&gt;</span> <span class="hljs-built_in">Object</span>.assign(appgrid.defaultGetRequestInfo(req), { <span class="hljs-attr">gid</span>: req.get(HEADER_GID) }),
+  getRequestInfo: <span class="hljs-function"><span class="hljs-params">req</span> =&gt;</span> <span class="hljs-built_in">Object</span>.assign(accedoOne.defaultGetRequestInfo(req), { <span class="hljs-attr">gid</span>: req.get(HEADER_GID) }),
   log(...args) { <span class="hljs-built_in">console</span>.log(...args) }
 }))</pre>
     
