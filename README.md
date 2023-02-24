@@ -1,19 +1,10 @@
-# The Accedo One Express middleware [![npm](https://img.shields.io/npm/v/@accedo/accedo-one-express.svg?maxAge=3600)](https://www.npmjs.com/package/@accedo/accedo-one-express)
-
-```
-   _                    _           ___
-  /_\   ___ ___ ___  __| | ___     /___\_ __   ___
- //_\\ / __/ __/ _ \/ _` |/ _ \   //  // '_ \ / _ \
-/  _  \ (_| (_|  __/ (_| | (_) | / \_//| | | |  __/
-\_/ \_/\___\___\___|\__,_|\___/  \___/ |_| |_|\___|
-
-```
+# The Accedo Control Express middleware [![npm](https://img.shields.io/npm/v/@accedo/accedo-one-express.svg?maxAge=3600)](https://www.npmjs.com/package/@accedo/accedo-one-express)
 
 ## Summary
 
-This is the official [Accedo One](https://www.accedo.tv/one/) middleware for Express.
+This is an Accedo Control middleware for Express.
 
-The [Accedo One SDK] for Javascript(https://github.com/Accedo-Products/accedo-one-sdk-js/) provides an easy way to make use of Accedo One APIs.
+The [Accedo Control SDK] for Javascript(https://github.com/Accedo-Products/accedo-control-sdk-js/) provides an easy way to make use of Accedo One APIs.
 This middleware provides additional benefits and makes things even easier in the context of an Express app.
 
 We follow [semantic versioning](http://semver.org/), and you may have a look at our change log [here](./CHANGELOG.md).
@@ -30,16 +21,16 @@ Regarding Express, we support and test against version 4.
 
 ## Features
 
-Features inherited from the Accedo One SDK for Javascript :
- - easy access to Accedo One APIs
+Features inherited from the Accedo Control SDK for Javascript :
+ - easy access to Accedo Control APIs
  - automatic deviceId creation when none was provided
  - automatic session creation when none was provided (lazy - only when needed)
  - automatic session re-creation when the existing one has expired (lazy)
- - ensures only one session will be created at a time, even if a request triggers concurrent Accedo One calls
+ - ensures only one session will be created at a time, even if a request triggers concurrent Accedo Control calls
 
 Extra features provided by this Express middleware :
- - automatic creation of Accedo One client instances for each request, attached to the response object for further use
- - automatically passes the requester's IP onto Accedo One calls for analytics and geolocated services
+ - automatic creation of Accedo Control client instances for each request, attached to the response object for further use
+ - automatically passes the requester's IP onto Accedo Control calls for analytics and geolocated services
  - automatic reuse of the deviceId through cookies (can be customized to use anything else based on requests)
  - automatic reuse of the sessionKey through cookies (can be customized to use anything else based on requests)
 
@@ -52,15 +43,15 @@ For instance: `app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])`
 
 | What | Link
 |------|------
-| The Accedo One Express middleware (this project) | https://accedo-products.github.io/accedo-one-sdk-express/
-| The Accedo One JS SDK | https://accedo-products.github.io/accedo-one-sdk-js/
-| The Accedo One REST APIs | https://developer.one.accedo.tv
+| The Accedo Control Express middleware (this project) | https://accedo-products.github.io/accedo-control-sdk-express/
+| The Accedo Control JS SDK | https://accedo-products.github.io/accedo-control-sdk-js/
+| The Accedo Control REST APIs | https://developer.one.accedo.tv
 
-Each Express response gets associated to an Accedo One client instance, found in `res.locals.accedoOneClient` (when `res` is the response variable name).
+Each Express response gets associated to an Accedo Control client instance, found in `res.locals.accedoOneClient` (when `res` is the response variable name).
 
-To find what methods are available on these instances, refer to the API docs for the Accedo One JS SDK listed above.
+To find what methods are available on these instances, refer to the API docs for the Accedo Control JS SDK listed above.
 
-The doc for the REST APIs is also listed as Accedo One-specific terminology is defined there.
+The doc for the REST APIs is also listed as Accedo Control-specific terminology is defined there.
 
 ## Installation
 
@@ -113,16 +104,15 @@ See also examples in the documentation linked above.
 
 ## More information & Links
 
-* [Accedo One homepage](https://www.accedo.tv/one)
-* [Accedo One API documentation](https://developer.one.accedo.tv)
+* [Accedo Control API documentation](https://developer.one.accedo.tv)
 
 ## On the Express `trust proxy` setting, and propagating the right IP
 
-This middleware will set the incoming request IP (let's call it `∑`) in the x-forwarded-for (XFF) header, when sending requests to Accedo One. The value of `∑` is what Express decides is the user’s IP.
+This middleware will set the incoming request IP (let's call it `∑`) in the x-forwarded-for (XFF) header, when sending requests to Accedo Control. The value of `∑` is what Express decides is the user’s IP.
 
 1/ Express just acts normally when no trust proxy is set, using the incoming connection IP. So it sets `∑` to the proper IP on direct user access, and the proxy (or CDN, or such)'s IP when the user went through that.
 
-You want to avoid reporting any proxy's IP, because it would prevent Accedo One's analytics and geolocation features from working reliably.
+You want to avoid reporting any proxy's IP, because it would prevent Accedo Control's analytics and geolocation features from working reliably.
 
 2/ When setting trust proxy to true (or enabling it, which does the same thing), the behaviour changes.
 Now, the value of `∑` will be the first value given in the incoming request's XFF header. “First value” is the left-most value.
